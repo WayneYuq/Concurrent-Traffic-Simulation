@@ -18,7 +18,7 @@ template <typename T>
 void MessageQueue<T>::send(T &&msg)
 {
     std::lock_guard<std::mutex> lck(_mtx);
-    std::cout << "  Message " << msg << " has been send to the queue." << "\n";
+    std::cout << "  Message has been send to the queue." << "\n";
 
     _queue.push_back(std::move(msg));
     _cond.notify_one();
@@ -78,13 +78,13 @@ void TrafficLight::cycleThroughPhases()
             if (_currentPhase == TrafficLightPhase::red)
             {
                 _messages.send(std::move(TrafficLightPhase::green));
-                std::lock_guard<std::mutex> lck(_mutex);
+                // std::lock_guard<std::mutex> lck(_mutex);
                 _currentPhase = TrafficLightPhase::green;
             }
             else
             {
                 _messages.send(std::move(TrafficLightPhase::red));
-                std::lock_guard<std::mutex> lck(_mutex);
+                // std::lock_guard<std::mutex> lck(_mutex);
                 _currentPhase = TrafficLightPhase::red;
             }
             

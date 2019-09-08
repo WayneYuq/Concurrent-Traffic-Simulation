@@ -8,6 +8,7 @@
 
 // forward declarations to avoid include cycle
 class Vehicle;
+
 enum class TrafficLightPhase
 {
     red, green
